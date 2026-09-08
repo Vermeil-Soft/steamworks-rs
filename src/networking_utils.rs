@@ -151,6 +151,7 @@ impl NetworkingUtils {
         }
     }
 
+    /// Get a config value applied for the global instance.
     pub fn get_config_value(
         &self,
         value: NetworkingConfigValue,
