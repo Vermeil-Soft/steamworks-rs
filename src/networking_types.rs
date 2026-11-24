@@ -2036,16 +2036,31 @@ impl NetworkingMessage {
         unsafe { (*self.message).m_nFlags = send_flags.bits() }
     }
 
-    /// Bitmask of k_nSteamNetworkingSend_xxx flags.
-    /// For received messages, only the k_nSteamNetworkingSend_Reliable bit is valid.
-    /// For outbound messages, all bits are relevant
+    /// Channel of a message. Not used in Sockets
     pub fn channel(&self) -> i32 {
         unsafe { (*self.message).m_nChannel }
     }
 
+    /// Set the channel of a message. Not used in Sockets
     pub fn set_channel(&mut self, channel: i32) {
         unsafe {
             (*self.message).m_nChannel = channel;
+        }
+    }
+
+    /// Which lane this message was sent on. Only used in Sockets.
+    ///
+    /// See `NetworkingSockets::configure_connection_lanes`.
+    pub fn lane(&self) -> u16 {
+        unsafe { (*self.message).m_idxLane }
+    }
+
+    /// Which lane this message should be sent on. Only used in Sockets.
+    ///
+    /// The lane must have been configured with `NetworkingSockets::configure_connection_lanes`, or be 0.
+    pub fn set_lane(&mut self, lane: u16) {
+        unsafe {
+            (*self.message).m_idxLane = lane;
         }
     }
 

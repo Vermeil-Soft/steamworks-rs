@@ -405,10 +405,10 @@ impl NetworkingSockets {
         crate::to_steam_result(result)
     }
 
-    /// Send one or more messages on any connection, with per-message lane/channel support.
+    /// Send one or more messages on any connection, with per-message lane support.
     ///
     /// Each `NetworkingMessage` must have its connection set via `set_connection()`.
-    /// Use `set_channel()` to specify the lane for each message.
+    /// Use `set_lane()` to specify the lane for each message.
     ///
     /// This is the same as `ListenSocket::send_messages()` but callable without
     /// a listen socket - works for both listener and dialer sides.
